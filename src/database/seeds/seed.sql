@@ -1,34 +1,3 @@
--- Namu Wellness - Seed Data
-
-CREATE TABLE IF NOT EXISTS programs (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  description TEXT,
-  category ENUM('meditação', 'exercício', 'nutrição') NOT NULL,
-  duration_weeks INT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS activities (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  program_id INT NOT NULL,
-  title VARCHAR(255) NOT NULL,
-  description TEXT,
-  day_of_week ENUM('segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado', 'domingo') NOT NULL,
-  duration_minutes INT NOT NULL,
-  FOREIGN KEY (program_id) REFERENCES programs(id) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS participations (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  user_name VARCHAR(255) NOT NULL,
-  activity_id INT NOT NULL,
-  completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  notes TEXT,
-  FOREIGN KEY (activity_id) REFERENCES activities(id) ON DELETE CASCADE
-);
-
 -- Programas
 INSERT INTO programs (name, description, category, duration_weeks) VALUES
 ('Mindfulness para Iniciantes', 'Programa de meditação guiada para quem está começando a prática de mindfulness.', 'meditação', 4),
@@ -45,7 +14,7 @@ INSERT INTO activities (program_id, title, description, day_of_week, duration_mi
 (3, 'Mindful Eating', 'Prática de alimentação consciente e presente.', 'sexta', 20);
 
 -- Participações
-INSERT INTO participations (user_name, activity_id, completed_at, notes) VALUES
+INSERT INTO participations (user_name, activity_id, completed_at, notes) VALUESs
 ('Ana Silva', 1, '2025-01-15 08:00:00', 'Primeira sessão, muito tranquila.'),
 ('Carlos Santos', 3, '2025-01-15 07:00:00', 'Ótima forma de começar o dia.'),
 ('Ana Silva', 2, '2025-01-17 09:00:00', 'Consegui relaxar bastante.'),
