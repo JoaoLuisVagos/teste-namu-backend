@@ -1,5 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
+import { ActivityModel } from '../modules/activities/activity.model';
 import { ProgramModel } from '../modules/programs/program.model';
+import { ParticipationModel } from '../modules/participations/participations.model';
 
 const sequelize = new Sequelize({
   dialect: 'mysql',
@@ -8,7 +10,7 @@ const sequelize = new Sequelize({
   username: process.env.DB_USER ?? 'root',
   password: process.env.DB_PASSWORD ?? 'root',
   database: process.env.DB_NAME ?? 'namu_wellness',
-  models: [ProgramModel]
+  models: [ProgramModel, ActivityModel, ParticipationModel]
 });
 
 export default sequelize;

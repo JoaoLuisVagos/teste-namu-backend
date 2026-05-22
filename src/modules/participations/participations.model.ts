@@ -1,6 +1,6 @@
 import { Model, Column, DataType, Table } from 'sequelize-typescript';
 
-@Table({ tableName: 'participations', timestamps: true, underscored: true })
+@Table({ tableName: 'participations', timestamps: false, underscored: true })
 export class ParticipationModel extends Model {
   @Column({ type: DataType.INTEGER, primaryKey: true, autoIncrement: true })
   declare id: number;

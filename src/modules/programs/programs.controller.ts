@@ -20,6 +20,16 @@ export async function getProgram(req: Request, res: Response, next: NextFunction
   }
 }
 
+export async function getProgramSummary(req: Request, res: Response, next: NextFunction) {
+  try {
+    const id = Number(req.params.programId);
+    const summary = await programsService.summary(id);
+    return res.json(summary);
+  } catch (err) {
+    return next(err);
+  }
+}
+
 export async function createProgram(req: Request, res: Response, next: NextFunction) {
   try {
     const created = await programsService.create(req.body);

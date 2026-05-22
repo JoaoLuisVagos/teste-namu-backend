@@ -1,4 +1,5 @@
-import { Model, Table, Column, DataType } from 'sequelize-typescript';
+import { Model, Table, Column, DataType, HasMany } from 'sequelize-typescript';
+import { ActivityModel } from '../activities/activity.model';
 
 @Table({ tableName: 'programs', timestamps: true, underscored: true })
 export class ProgramModel extends Model {
@@ -16,4 +17,7 @@ export class ProgramModel extends Model {
 
   @Column({ type: DataType.INTEGER, allowNull: false })
   declare duration_weeks: number;
+
+  @HasMany(() => ActivityModel)
+  declare activities?: ActivityModel[];
 }
