@@ -45,3 +45,5 @@ describe('Participations Service - update validation', () => {
     await expect(participationsService.update(participation.id, { activity_id: -1 })).rejects.toBeInstanceOf(AppError);
   });
 });
+
+export {};

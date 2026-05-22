@@ -46,3 +46,5 @@ describe('Programs Service - update validation', () => {
     await expect(programsService.update(program.id, { duration_weeks: -1 })).rejects.toBeInstanceOf(AppError);
   });
 });
+
+export {};
