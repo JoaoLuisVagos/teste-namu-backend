@@ -13,11 +13,23 @@ API REST para gerenciar programas de bem-estar, atividades e participações de 
 
 ## Tecnologias Utilizadas
 
-- Node.js
-- TypeScript
-- Express
-- Sequelize com MySQL
-- Jest para testes unitários
+### Node.js
+Escolhido pela simplicidade no desenvolvimento de APIs REST e grande ecossistema.
+
+### TypeScript
+Utilizado para aumentar previsibilidade, legibilidade e segurança do código através de tipagem estática.
+
+### Express
+Framework leve e flexível para construção da API.
+
+### Sequelize + MySQL
+ORM utilizado para abstração do banco de dados, mantendo produtividade e organização da camada de persistência.
+
+### Jest
+Utilizado para testes unitários das regras de negócio.
+
+### Docker + Docker Compose
+Facilitam a execução do projeto em qualquer ambiente, padronizando aplicação e banco de dados.
 
 ## Estrutura Utilizadas
 
