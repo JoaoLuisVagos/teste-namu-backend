@@ -1,18 +1,43 @@
-version: "3.8"
-
 services:
   mysql:
-    image: mysql:8
+    image: mysql:5.7
     container_name: namu_wellness_db
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
-      MYSQL_DATABASE: ${DB_NAME:-namu_wellness}
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: namu_wellness
     ports:
-      - "${DB_PORT:-3306}:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./src/database/seeds/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+      - ./src/database/migrations/001-create-programs.sql:/docker-entrypoint-initdb.d/001-create-programs.sql:ro
+      - ./src/database/migrations/003-create-activities.sql:/docker-entrypoint-initdb.d/002-create-activities.sql:ro
+      - ./src/database/migrations/002-create-participations.sql:/docker-entrypoint-initdb.d/003-create-participations.sql:ro
+      - ./src/database/seeds/seed.sql:/docker-entrypoint-initdb.d/999-seed.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -proot --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: namu_wellness_api
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      PORT: 3000
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: namu_wellness
+    ports:
+      - "3000:3000"
 
 volumes:
   mysql_data:
